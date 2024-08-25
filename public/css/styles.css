@@ -1,0 +1,64 @@
+body {
+  margin: 0 auto;
+  font-family: "Noto Serif Bengali", serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.ticker-container {
+  width: 100%;
+  overflow: hidden;
+  background-color: #f8f9fa;
+  padding: 10px;
+  height: 40px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10; /* Ensures this is above other content */
+}
+
+.ticker-wrap {
+  display: flex;
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+  animation: ticker 40s linear infinite;
+}
+
+.ticker-container:hover .ticker-wrap {
+  animation-play-state: paused; /* Pause the animation on hover */
+}
+
+.ticker-item {
+  display: inline-block;
+  padding-right: 50px;
+  transition: transform 0.1s ease; /* Smooth push effect */
+}
+
+/* text_slider start */
+.ticker-item a {
+  text-decoration: none;
+  color: #000; /* Default link color */
+  transition: color 0.1s ease; /* Smooth color change */
+}
+
+.ticker-item:hover {
+  transform: scale(1.1); /* Scale up slightly on hover */
+}
+
+.ticker-item:hover a {
+  color: #007bff; /* Change link color on hover */
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* text_slider end */

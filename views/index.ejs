@@ -1,0 +1,48 @@
+<div>
+  <div class="flex flex-col-reverse md:flex-row gap-4">
+    <div class="md:w-[50%]">
+      <% bannerNewses?.leftSideData?.forEach((d) => { %>
+      <div class="border-b my-5">
+        <a
+          href="news/<%= d?._id %>"
+          class="text-lg hover:text-blue-600 font-bold mb-1"
+        >
+          <%= d?.title %>
+        </a>
+      </div>
+
+      <% }) %>
+    </div>
+    <div class="w-full flex flex-col justify-center items-center lg:mt-5">
+      <div
+        class="w-full min-h-[160px] bg-gray-300 overflow-hidden rounded-md md:min-h-[300px] md:bg-white md:overflow-auto md:flex justify-center"
+      >
+        <img
+          class="md:max-h-[450px] rounded-md"
+          src="<%= bannerNewses?.leadNews[0]?.img %>"
+          alt=""
+          loading="lazy"
+        />
+      </div>
+      <h1
+        class="text-2xl md:text-3xl font-bold my-2 text-center text-blue-500 hover:text-red-600"
+      >
+        <a href="news/<%= bannerNewses?.leadNews[0]?._id %>">
+          <%= bannerNewses?.leadNews[0]?.title %>
+        </a>
+      </h1>
+    </div>
+    <div class="md:w-[50%] hidden md:block">
+      <% bannerNewses?.rightSideData?.forEach((d) => { %>
+      <div class="border-b border-gray-300 my-5">
+        <a
+          href="news/<%= d?._id %>"
+          class="text-lg hover:text-blue-600 font-bold mb-1"
+        >
+          <%= d?.title %>
+        </a>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
