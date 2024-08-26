@@ -1,0 +1,128 @@
+<% if (news && news?._id) { %>
+<div class="my-10 lg:w-[90%] mx-auto flex flex-col md:flex-row gap-8">
+  <div class="md:w-[90%]">
+    <div class="mb-4">
+      <span class="text-sm font-bold border-b-2 border-gray-800 text-red-500">
+        <%= news?.category %>
+      </span>
+    </div>
+    <h1 class="text-2xl md:text-3xl font-bold"><%= news?.title %></h1>
+    <h3 class="text-xl md:text-xl my-4">
+      <% if (news?.subTitle) { %> <%= news?.subTitle %> <% } %>
+    </h3>
+    <div
+      class="w-full max-w-[780px] min-h-[160px] bg-gray-300 overflow-hidden rounded-md md:min-h-[250px] md:bg-gray-300"
+    >
+      <!-- {newsContent?.video ? (
+          VideoPlayer(newsContent?.video)
+        ) : ( -->
+      <img
+        src="<%= news?.img %>"
+        alt=""
+        class="rounded-md w-full md:max-h-[60vh]"
+      />
+      <!-- )} -->
+    </div>
+    <p class="text-gray-600 my-3 font-bold"><%= news?.postBy %></p>
+    <p class="text-gray-600">
+      তারিখ: <%= news?.postDate %>
+
+      <span class="ml-2"> <%= news?.postTime %> </span>
+    </p>
+    <div class="flex items-center gap-4 my-3">
+      <i class="fa-brands fa-facebook"></i>
+      <i class="fa-brands fa-square-whatsapp"></i>
+      <i class="fa-brands fa-square-x-twitter"></i>
+      <i class="fa-solid fa-copy"></i>
+    </div>
+    <div class="html-container"><%- news.des %></div>
+  </div>
+  <div class="md:mt-[69px]">
+    <!-- Sorbosesh and Sorbadhik pothito news Tab start -->
+    <div class="border-2 border-blue-500 max-w-[500px]">
+      <div class="flex top-0">
+        <button
+          id="tab1"
+          class="w-full py-2 px-4 mr-2 bg-blue-500 text-white"
+          onclick="setActiveTab(1)"
+        >
+          সর্বশেষ
+        </button>
+        <button id="tab2" class="w-full py-2 px-4" onclick="setActiveTab(2)">
+          সর্বাধিক পঠিত
+        </button>
+      </div>
+      <div id="content1" class="mt-4 h-[450px] overflow-y-scroll p-2">
+        <% [0, 1, 2, 3, 4, 5].forEach(function(d, index) { %>
+        <a
+          href="/news/ed"
+          class="flex gap-2 border-b items-center my-2"
+          onclick="setLoading(false)"
+        >
+          <img
+            class="w-[87px] h-16 rounded-md"
+            src="https://i.ibb.co/SBRF7Tv/IMG-20240813-WA0013.jpg"
+            alt="img"
+          />
+          <p class="text-md font-semibold hover:text-blue-600">
+            ১৪ বছর পর দখলমুক্ত হলো কলাবাড়ী খেলার মাঠ
+          </p>
+        </a>
+        <% }) %>
+      </div>
+      <div id="content2" class="mt-4 h-[450px] overflow-y-scroll p-2 hidden">
+        <% [5, 4, 3, 2, 1, 0].forEach(function(d, index) { %>
+        <a
+          href="/news/ed"
+          class="flex gap-2 border-b items-center my-2"
+          onclick="setLoading(false)"
+        >
+          <img
+            class="w-[87px] h-16 rounded-md"
+            src="https://i.ibb.co/SBRF7Tv/IMG-20240813-WA0013.jpg"
+            alt="img"
+          />
+          <p class="text-md font-semibold hover:text-blue-600">
+            বছর পর দখলমুক্ত হলো কলাবাড়ী খেলার মাঠ
+          </p>
+        </a>
+        <% }) %>
+      </div>
+    </div>
+    <!-- Sorbosesh and Sorbadhik pothito news Tab end -->
+
+    <div class="flex">
+      <div>
+        <p class="text-xl md:text-xl font-bold">আরও খবর</p>
+        <p class="h-[4px] bg-red-600 text-center w-1/2"></p>
+      </div>
+    </div>
+    <% [0, 1, 2, 3, 4, 3, 3, 3]?.slice(0, 6)?.forEach(function(d) { %>
+
+    <a
+      href="/"
+      class="flex flex-col justify-center items-center px-2 py-6 bg-gray-100 rounded-md mt-4"
+    >
+      <img
+        class="w-20 h-20 rounded-full"
+        src="https://i.ibb.co/SBRF7Tv/IMG-20240813-WA0013.jpg"
+        alt="img"
+        loading="lazy"
+      />
+      <p
+        class="text-gray-600 text-sm flex my-4 justify-center items-center gap-2"
+      >
+        <i class="fa-regular fa-clock"></i> ১১ দিন আগে
+      </p>
+      <p class="text-md font-bold text-center">
+        শাবিপ্রবিতে কোম্পানীগঞ্জ স্টুডেন্টস এসোসিয়েশন এর নতুন কমিটি গঠন
+      </p>
+    </a>
+    <% }) %>
+  </div>
+</div>
+<% } else { %>
+<p class="text-center text-2xl font-bold text-red-600">
+  কোন খবর খুঁজে পাওয়া যায়নি
+</p>
+<% } %>

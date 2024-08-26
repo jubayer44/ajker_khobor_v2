@@ -3,6 +3,7 @@ const {
   bannerNews,
   categoryNews,
   mostViewed,
+  singleNews,
 } = require("../../public/js/dataLoader");
 const { getTimeAgo } = require("../../public/js/getTimeAgo");
 const { categories } = require("../../src/constant/constant");
@@ -27,7 +28,7 @@ const categoryPage = async (req, res) => {
   const limitNum = req.query?.limit || 7;
   const cateName = getBanCategory(param);
 
-  const news = await categoryNews(param, cateName, limitNum);
+  let news = await categoryNews(param, cateName, limitNum);
   const mostViewedNews = await mostViewed();
 
   if (news) {
@@ -35,8 +36,35 @@ const categoryPage = async (req, res) => {
       item["postTime"] = getTimeAgo(item?.postTime);
     });
   }
-
   res.render("category", { categories, news, pathName, mostViewedNews });
 };
 
-module.exports = { homepage, categoryPage };
+const newsDetailsPage = async (req, res) => {
+  const id = req.params?.id;
+
+  const news = await singleNews(id);
+
+  const time = news?.postTime?.split("T")[0];
+  const day = time?.split("-")[2];
+  const month = time?.split("-")[1];
+  const year = time?.split("-")[0];
+
+  const time24h = news?.times ? news.times : "12:23:32";
+  const [hours, minutes, seconds] = time24h?.split(":");
+  const date = new Date();
+  date.setHours(hours, minutes, seconds);
+
+  const time12h = date.toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true,
+  });
+
+  news ? (news["postDate"] = `${day}-${month}-${year}`) : null;
+  news ? (news["postTime"] = time12h) : null;
+
+  res.render("newsDetails", { categories, news });
+};
+
+module.exports = { homepage, categoryPage, newsDetailsPage };

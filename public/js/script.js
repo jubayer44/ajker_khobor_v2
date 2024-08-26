@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// load latest news
 window.onload = async () => {
   try {
     const response = await fetch("https://ajkerkhobor.news/api/latest");
@@ -32,3 +33,28 @@ window.onload = async () => {
     console.log(error);
   }
 };
+
+// Sorbosesh and Sorbadhik pothito new Tab
+let activeTab = 1;
+function setActiveTab(tabNumber) {
+  activeTab = tabNumber;
+  document
+    .getElementById("tab1")
+    .classList.toggle("bg-blue-500", activeTab === 1);
+  document
+    .getElementById("tab1")
+    .classList.toggle("text-white", activeTab === 1);
+  document
+    .getElementById("tab2")
+    .classList.toggle("bg-blue-500", activeTab === 2);
+  document
+    .getElementById("tab2")
+    .classList.toggle("text-white", activeTab === 2);
+
+  document
+    .getElementById("content1")
+    .classList.toggle("hidden", activeTab !== 1);
+  document
+    .getElementById("content2")
+    .classList.toggle("hidden", activeTab !== 2);
+}

@@ -47,4 +47,19 @@ const mostViewed = async () => {
     .catch((error) => console.log(error));
 };
 
-module.exports = { latestNews, bannerNews, categoryNews, mostViewed };
+const singleNews = async (id) => {
+  return await fetch(`https://ajkerkhobor.news/api/newsDetails?id=${id}`)
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => console.log(error));
+};
+
+module.exports = {
+  latestNews,
+  bannerNews,
+  categoryNews,
+  mostViewed,
+  singleNews,
+};
